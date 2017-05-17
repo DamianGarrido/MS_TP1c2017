@@ -1,1 +1,0 @@
-pkg install -auto control-3.0.0.tar.gz
