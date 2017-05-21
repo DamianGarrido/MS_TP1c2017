@@ -10,14 +10,15 @@ k = 1;
 A=zpk(Zer,Pol,k);
 
 #tf2zp(pol_numerador, pol_denominador)=> [Ceros, Polos, Ganancia]
-[Zer,Pol,k]=tf2zp([5 2],[1 4 20]);
+[Zer,Pol,k]=tf2zp(sys)
 
 #pzmap()=> [polos,ceros] || Grafica (si no se asigna)
 [p,z] =pzmap(sys);
 
 
 #tfdata(funcion_transferencia)=>[pol_numerador, pol_denominador]
-[num,den] = tfdata(sys)
+[num,den] = tfdata(sys);
+
 
 
 
