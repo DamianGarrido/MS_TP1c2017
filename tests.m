@@ -1,16 +1,24 @@
-#TF(numerador, denominador)
+#tf(pol_numerador, pol_denominador) => Funcion_transferencia
 num = [1, 5, 7];
 den = [1, 5, 6];
 sys = tf (num, den);
 
-#TF(ceros,polos,ganancia)
+#zpk(ceros, polos, ganancia) => Funcion_transferencia
 Zer = [1];
 Pol = [0,2];
-k = 1;#Multiplica -> numerador
+k = 1;
 A=zpk(Zer,Pol,k);
 
-#Ceros_Polos_Ganacia (numerador, denominador)
-[Zer,Pol,k]=tf2zp([5 2],[1 4 20])
+#tf2zp(pol_numerador, pol_denominador)=> [Ceros, Polos, Ganancia]
+[Zer,Pol,k]=tf2zp([5 2],[1 4 20]);
+
+#pzmap()=> [polos,ceros] || Grafica (si no se asigna)
+[p,z] =pzmap(sys);
+
+
+#tfdata(funcion_transferencia)=>[pol_numerador, pol_denominador]
+[num,den] = tfdata(sys)
+
 
 
 
