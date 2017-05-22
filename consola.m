@@ -14,6 +14,12 @@ while(opcion ~= 0)
     ft = transferencia_dados_ceros_polos_ganancia;
   case 3
     indicar_polos(ft);
+  case 4
+    indicar_ceros(ft);
+  case 5
+    indicar_ganancia(ft);
+  case 6
+    mostrar_transferencia(ft);
   case 99
     mostrar_menu
   otherwise
