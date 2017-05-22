@@ -1,3 +1,3 @@
 ﻿# MS_TP1c2017
 TP Matemática Superior - Octave
-#Init.m te carga los paquetes necesarios en octave
+#Instalar octave version 4.2.1 con instalador, no portable!
