@@ -1,5 +1,19 @@
 1;#Simpre! para definir un script de funciones
 
+#Transferencia dados polos y ceros imaginarios
+function retval  = polinomio_dadas_raices(raices) 
+  s = tf('s');
+  productoria = 1;
+  for raiz = raices
+    if(imag(raiz) == 0)
+      productoria = productoria *(s - raiz);
+    else
+      productoria = productoria *((s - real(raiz))^2 + (imag(raiz))^2);
+    endif
+  endfor
+  retval = productoria;
+endfunction
+
 function retval  = transferencia_dados_polinomios 
   x = input('Ingrese coheficientes numerador [a,b,c,...]: ');
   y = input('Ingrese coheficientes denominador [a,b,c,...]: ');
@@ -7,11 +21,18 @@ function retval  = transferencia_dados_polinomios
 endfunction
 
 function retval  = transferencia_dados_ceros_polos_ganancia
-  x = input('Ingrese ceros [a,b,c,...]: ');
-  y = input('Ingrese polos [a,b,c,...]: '); 
-  z = input('Ingrese ganancia [a,b,c,...]: ');
-  retval = zpk(x,y,z)
-
+  fprintf("Si decide ingresar un complejo no ingrese su conjugado, este ya se incluye segun el T.F.A\n");
+  fprintf("Este programa solo genera transferencias con coheficientes reales\n");
+  ceros = input('Ingrese ceros [a,b,c,...]: ');
+  polos = input('Ingrese polos [a,b,c,...]: ') ;
+  ganancia = input('Ingrese ganancia k: ');
+  
+  pol_numerador = polinomio_dadas_raices(ceros);
+  pol_denominador = polinomio_dadas_raices(polos);
+  
+  s = tf('s');
+  retval = ganancia*pol_numerador/pol_denominador
+ 
 endfunction
 
 function indicar_polos(transferencia)
