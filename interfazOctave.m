@@ -78,7 +78,8 @@ function pushbutton_callback(src,event,f)
 end
 
 
-form_master = figure('MenuBar','None');
+#form_master = figure('MenuBar','None'); MenuBar funciona bien aleatoriamente
+form_master = figure(); 
 menu = uimenu(form_master,'Label','Ingresar Transferencia');
     uimenu(menu,'Label','Dados coheficientes','Callback',  {@pushbutton_callback,form_master} );
     uimenu(menu,'Label','Dados polos, ceros y ganancia','Callback','disp(''save'')');
