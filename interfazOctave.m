@@ -20,8 +20,10 @@ function mostrar (h, e, p, q )
   title ("Simple 2-D Plot");
 endfunction
   
-function pushbutton_callback(src,event,f)
+function callback_transferencia1(src,event,formulario)
  
+  f = formulario;
+  
   uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
   
   #Global
@@ -70,7 +72,7 @@ function pushbutton_callback(src,event,f)
   i=30; #posicion inicial inferior
   j=100; #espaciado
 
-  u1 = uicontrol('Parent',f,'Position',[k i 75 30],'String','Confirmar','callback', {@mostrar , e2, e3});
+  u1 = uicontrol('Parent',f,'Position',[k i 75 30],'String','Confirmar','callback', {@callback_transferencia_dados_polinomios , e2, e3});
   #u2 = uicontrol('Parent',f,'Position',[k+j i 75 30],'String','Borrar');
   #u3 = uicontrol('Parent',f,'Position',[k+j*2 i 75 30],'String','Cancel');
 
@@ -81,7 +83,7 @@ end
 #form_master = figure('MenuBar','None'); MenuBar funciona bien aleatoriamente
 form_master = figure(); 
 menu = uimenu(form_master,'Label','Ingresar Transferencia');
-    uimenu(menu,'Label','Dados coheficientes','Callback',  {@pushbutton_callback,form_master} );
+    uimenu(menu,'Label','Dados coheficientes','Callback',  {@callback_transferencia1,form_master} );
     uimenu(menu,'Label','Dados polos, ceros y ganancia','Callback','disp(''save'')');
 
 

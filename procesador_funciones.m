@@ -21,11 +21,11 @@ function retval  = transferencia_dados_polinomios
 endfunction
 
 function callback_transferencia_dados_polinomios(h, e, numerador, denominador) 
-  matrix_num = str2num(get(numerador, 'String'));
-  matrix_den = str2num(get(denominador, 'String'));
-  funcion_transferencia = tf(numerador,denominador);
-  guadar_transferencia(funcion_transferencia);
-  imprimir_mensaje(funcion_transferencia);
+  matrix_num = str2num(get(numerador, 'String'))
+  matrix_den = str2num(get(denominador, 'String'))
+  funcion_transferencia = tf(matrix_num,matrix_den)
+  #guadar_transferencia(funcion_transferencia);
+  #imprimir_mensaje(funcion_transferencia);
 endfunction
 
 function guadar_transferencia(transferencia) 
