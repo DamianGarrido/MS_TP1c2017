@@ -1,17 +1,7 @@
-clear;
-
-hg = figure;
-f = uipanel('Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
-
-#Global
-k=43;#margen izquierdo
-
-#Header
-a=500;#ancho 
-l=30; #largo
-h=360;  #altura
-
-t2 = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','Header'); 
+#Consola - Ingresar datos
+pkg load control
+pkg load signal
+source ("procesador_funciones.m");
 
 function mostrar (h, e, p, q )
   # Se debe iniciar la figura
@@ -29,43 +19,71 @@ function mostrar (h, e, p, q )
   ylabel (funcion1);
   title ("Simple 2-D Plot");
 endfunction
+  
+function pushbutton_callback(src,event,f)
+ 
+  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  
+  #Global
+  k=43;#margen izquierdo
 
-             
-#Labels-Inputs
-i=75; #posicion inicial inferior
-j=40;  #interlineado
-d=100; #espaciado
+  #Header
+  a=500;#ancho 
+  l=30; #largo
+  h=360;  #altura
 
-t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*6 75 30],'String','Dominio X'); 
-e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*6 75 30]); 
+  t2 = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','INGRESAR COHEFICIENTES DE POLINOMIOS'); 
 
-#t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*5 75 30],'String','Input'); 
-#e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*5 75 30]); 
 
-t3 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*4 75 30],'String','Funcion'); 
-e3 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*4 75 30]);  
 
-#t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*3 75 30],'String','Input'); 
-#e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*3 75 30]);  
+               
+  #Labels-Inputs
+  i=75; #posicion inicial inferior
+  j=40;  #interlineado
+  d=100; #espaciado
 
-#t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*2 75 30],'String','Input'); 
-#e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*2 75 30]); 
+  t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*6 75 30],'String','Numerador'); 
+  e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*6 75 30], 'Tag', 'pol_numerador'); 
 
-#t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j 75 30],'String','Input'); 
-#e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j 75 30]);  
+  #t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*5 75 30],'String','Input'); 
+  #e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*5 75 30]); 
 
-#t2 = uicontrol('Parent',f,"style", "text",'Position',[k i 75 30],'String','Input'); 
-#e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i 75 30]);  
+  t3 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*4 75 30],'String','Denominador'); 
+  e3 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*4 75 30]);  
 
-#Ploteo
-t2 = uicontrol('Parent',f,"style", "text",'Position',[k*6.2 i 275 270],'String','Grafico'); 
+  #t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*3 75 30],'String','Input'); 
+  #e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*3 75 30]);  
 
-#Botonera
-i=30; #posicion inicial inferior
-j=100; #espaciado
+  #t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j*2 75 30],'String','Input'); 
+  #e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*2 75 30]); 
 
-u1 = uicontrol('Parent',f,'Position',[k i 75 30],'String','Graficar','callback', {@mostrar , e2, e3});
-u2 = uicontrol('Parent',f,'Position',[k+j i 75 30],'String','Borrar');
-u3 = uicontrol('Parent',f,'Position',[k+j*2 i 75 30],'String','Cancel');
+  #t2 = uicontrol('Parent',f,"style", "text",'Position',[k i+j 75 30],'String','Input'); 
+  #e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j 75 30]);  
+
+  #t2 = uicontrol('Parent',f,"style", "text",'Position',[k i 75 30],'String','Input'); 
+  #e2 = uicontrol('Parent',f,"style", "edit",'Position',[k+d i 75 30]);  
+
+  #Grafico
+  #t2 = uicontrol('Parent',f,"style", "text",'Position',[k*6.2 i 275 270],'String','Grafico'); 
+
+  #Botonera
+  i=30; #posicion inicial inferior
+  j=100; #espaciado
+
+  u1 = uicontrol('Parent',f,'Position',[k i 75 30],'String','Confirmar','callback', {@mostrar , e2, e3});
+  #u2 = uicontrol('Parent',f,'Position',[k+j i 75 30],'String','Borrar');
+  #u3 = uicontrol('Parent',f,'Position',[k+j*2 i 75 30],'String','Cancel');
+
+
+end
+
+
+form_master = figure('MenuBar','None');
+menu = uimenu(form_master,'Label','Ingresar Transferencia');
+    uimenu(menu,'Label','Dados coheficientes','Callback',  {@pushbutton_callback,form_master} );
+    uimenu(menu,'Label','Dados polos, ceros y ganancia','Callback','disp(''save'')');
+
+
+
 
 

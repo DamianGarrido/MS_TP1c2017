@@ -20,6 +20,22 @@ function retval  = transferencia_dados_polinomios
   retval = tf(x,y)
 endfunction
 
+function callback_transferencia_dados_polinomios(h, e, numerador, denominador) 
+  matrix_num = str2num(get(numerador, 'String'));
+  matrix_den = str2num(get(denominador, 'String'));
+  funcion_transferencia = tf(numerador,denominador);
+  guadar_transferencia(funcion_transferencia);
+  imprimir_mensaje(funcion_transferencia);
+endfunction
+
+function guadar_transferencia(transferencia) 
+  transferencia
+endfunction
+
+function imprimir_mensaje(transferencia) 
+  transferencia
+endfunction
+
 function retval  = transferencia_dados_ceros_polos_ganancia
   fprintf("Si decide ingresar un complejo no ingrese su conjugado, este ya se incluye segun el T.F.A\n");
   fprintf("Este programa solo genera transferencias con coheficientes reales\n");
