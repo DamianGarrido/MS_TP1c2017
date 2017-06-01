@@ -1,5 +1,4 @@
 1;#Simpre! para definir un script de funciones
-
 #Transferencia dados polos y ceros imaginarios
 function retval  = polinomio_dadas_raices(raices) 
   s = tf('s');
@@ -21,11 +20,27 @@ function retval  = transferencia_dados_polinomios
 endfunction
 
 function callback_transferencia_dados_polinomios(h, e, numerador, denominador) 
-  matrix_num = str2num(get(numerador, 'String'))
-  matrix_den = str2num(get(denominador, 'String'))
-  funcion_transferencia = tf(matrix_num,matrix_den)
+  
+  
+  matrix_num = str2num(get(numerador, 'String'));
+  matrix_den = str2num(get(denominador, 'String'));
+  funcion_transferencia = tf(matrix_num,matrix_den);
+  
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  % Modify the value of your counter
+  myhandles.numberOfErrors = myhandles.numberOfErrors + 1;
+  myhandles.transferencia = funcion_transferencia;
+  % Save the change you made to the structure
+  guidata(gcbo,myhandles);
+  
+  #set(label, 'String', evalc('funcion_transferencia'))
   #guadar_transferencia(funcion_transferencia);
   #imprimir_mensaje(funcion_transferencia);
+endfunction
+
+function mostrar_transferencia_(h,e)
+
 endfunction
 
 function guadar_transferencia(transferencia) 
