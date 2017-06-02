@@ -25,6 +25,59 @@ function callback_transferencia_dados_polinomios(h, e, numerador, denominador)
   matrix_num = str2num(get(numerador, 'String'));
   matrix_den = str2num(get(denominador, 'String'));
   funcion_transferencia = tf(matrix_num,matrix_den);
+  [Zer,Pol,k]=tf2zp(funcion_transferencia);
+  
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  % Modify the value of your counter
+  myhandles.numberOfErrors = myhandles.numberOfErrors + 1;
+  myhandles.transferencia = funcion_transferencia;
+  myhandles.polos = Pol;
+  myhandles.ceros = Zer;
+  myhandles.ganancia = k;
+  % Save the change you made to the structure
+  guidata(gcbo,myhandles);
+  
+  #set(label, 'String', evalc('funcion_transferencia'))
+  #guadar_transferencia(funcion_transferencia);
+  #imprimir_mensaje(funcion_transferencia);
+endfunction
+
+function callback_transferencia_dados_pzk(h, e, polos, ceros, ganancia)
+  matrix_polos = str2num(get(polos, 'String'));
+  matrix_ceros = str2num(get(ceros, 'String'));
+  num_ganancia = str2num(get(ganancia, 'String'));
+  
+  pol_numerador = polinomio_dadas_raices(matrix_ceros);
+  pol_denominador = polinomio_dadas_raices(matrix_polos);
+  
+  s = tf('s');
+  funcion_transferencia = num_ganancia*pol_numerador/pol_denominador;
+  [Zer,Pol,k]=tf2zp(funcion_transferencia);
+  
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  % Modify the value of your counter
+  myhandles.numberOfErrors = myhandles.numberOfErrors + 1;
+  myhandles.transferencia = funcion_transferencia;
+  myhandles.polos = Pol;
+  myhandles.ceros = Zer;
+  myhandles.ganancia = k;
+  % Save the change you made to the structure
+  guidata(gcbo,myhandles);
+  
+endfunction
+
+function callback_mostrar_pzk(h, e, polos, ceros, ganancia)
+  matrix_polos = str2num(get(polos, 'String'));
+  matrix_ceros = str2num(get(ceros, 'String'));
+  num_ganancia = str2num(get(ganancia, 'String'));
+  
+  pol_numerador = polinomio_dadas_raices(matrix_ceros);
+  pol_denominador = polinomio_dadas_raices(matrix_polos);
+  
+  s = tf('s');
+  funcion_transferencia = num_ganancia*pol_numerador/pol_denominador
   
   % Get the structure using guidata in the local function
   myhandles = guidata(gcbo);
@@ -34,21 +87,6 @@ function callback_transferencia_dados_polinomios(h, e, numerador, denominador)
   % Save the change you made to the structure
   guidata(gcbo,myhandles);
   
-  #set(label, 'String', evalc('funcion_transferencia'))
-  #guadar_transferencia(funcion_transferencia);
-  #imprimir_mensaje(funcion_transferencia);
-endfunction
-
-function mostrar_transferencia_(h,e)
-
-endfunction
-
-function guadar_transferencia(transferencia) 
-  transferencia
-endfunction
-
-function imprimir_mensaje(transferencia) 
-  transferencia
 endfunction
 
 function retval  = transferencia_dados_ceros_polos_ganancia
@@ -65,6 +103,7 @@ function retval  = transferencia_dados_ceros_polos_ganancia
   retval = ganancia*pol_numerador/pol_denominador
  
 endfunction
+
 
 function indicar_polos(transferencia)
  [Zer,Pol,k]=tf2zp(transferencia);

@@ -3,11 +3,7 @@ pkg load control
 pkg load signal
 source ("procesador_funciones.m");
 
-funcion_transferencia = 0;
-
 function form_ingresar_transferencia_polinomios(src,event,formulario)
-  
-
   f = formulario;
   
   uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
@@ -33,14 +29,50 @@ function form_ingresar_transferencia_polinomios(src,event,formulario)
   label_denominador = uicontrol('Parent',f,"style", "text",'Position',[k i+j*5 75 30],'String','Denominador'); 
   input_denominador = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*5 75 30]); 
 
-  nota="Nota\n Ejemplo coheficientes de polinomios: [1,2,3].\nDe derecha a izquierda termino independiente, lineal, cuadratico"
+  nota="Nota\n Ejemplo coheficientes de polinomios: [1,2,3].\nDe derecha a izquierda coheficiente independiente, lineal, cuadratico";
   label_nota = uicontrol('Parent',f,"style", "text",'Position',[k i+j-50 a 30+100],'String',nota); 
   button_confirmar = uicontrol('Parent',f,'Position',[k i+j*4 a 30],'String','Confirmar','callback',  {@callback_transferencia_dados_polinomios , input_numerador, input_denominador});
 end
 
+function form_ingresar_transferencia_dados_pzk(src,event,formulario)
+  f = formulario;
+  
+  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  
+  #Global
+  k=43;#margen izquierdo
+
+  #Header
+  a=500;#ancho 
+  l=30; #largo
+  h=360;  #altura
+
+  label_header = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','INGRESAR POLOS CEROS Y GANANCIA'); 
+               
+  #Labels-Inputs
+  i=75; #posicion inicial inferior
+  j=40;  #interlineado
+  d=100; #espaciado
+
+  label_polos = uicontrol('Parent',f,"style", "text",'Position',[k i+j*5 75 30],'String','Polos'); 
+  input_polos = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*5 75 30]); 
+
+  label_ceros = uicontrol('Parent',f,"style", "text",'Position',[k i+j*6 75 30],'String','Ceros'); 
+  input_ceros = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*6 75 30]); 
+  
+  label_ganancia = uicontrol('Parent',f,"style", "text",'Position',[k i+j*4 75 30],'String','Ganancia'); 
+  input_ganancia = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*4 75 30]); 
+  
+  nota="Nota\n Ejemplo ceros o polos: [1,i].\n Ejemplo ganancia: 1.\nSi decide ingresar un numero imaginario no ingrese su conjugado.\n Este ya se incluye, este programa genera funciones\n de transferencia solo con coheficiente reales";
+  label_nota = uicontrol('Parent',f,"style", "text",'Position',[k i+j-55 a 30+100],'String',nota); 
+  button_confirmar = uicontrol('Parent',f,'Position',[k i+j*3 a 30],'String','Confirmar','callback',  {@callback_transferencia_dados_pzk , input_polos, input_ceros, input_ganancia}');
+
+end
+
+
 
 function form_mostrar_transferencia(src,event,formulario)
-  
+
   f = formulario;
   
   uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
@@ -58,8 +90,106 @@ function form_mostrar_transferencia(src,event,formulario)
   val = myhandles.numberOfErrors;
   funcion_transferencia = myhandles.transferencia;
   
+  
   label_header = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','Expresion de la Funcion de Transferencia'); 
-  label_funcion_transferencia = uicontrol('Parent',f,"style", "text",'Position',[k h-100 a l*3],'String',evalc('funcion_transferencia')); 
+  label_funcion_transferencia = uicontrol('Parent',f,"style", "text",'Position',[k h-200 a l*6],'String',evalc('funcion_transferencia')); 
+
+
+end
+
+function form_mostrar_polos(src,event,formulario)
+
+  f = formulario;
+  
+  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  
+  #Global
+  k=43;#margen izquierdo
+
+  #Header
+  a=500;#ancho 
+  l=30; #largo
+  h=360;  #altura
+  
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  val = myhandles.numberOfErrors;
+  Polos = myhandles.polos;
+  
+  
+  label_header = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','POLOS DE LA FUNCION DE TRANSFERENCIA'); 
+  label_funcion_transferencia = uicontrol('Parent',f,"style", "text",'Position',[k h-200 a l*6],'String',evalc('Polos')); 
+
+
+end
+
+function form_mostrar_ceros(src,event,formulario)
+
+  f = formulario;
+  
+  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  
+  #Global
+  k=43;#margen izquierdo
+
+  #Header
+  a=500;#ancho 
+  l=30; #largo
+  h=360;  #altura
+  
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  val = myhandles.numberOfErrors;
+  Ceros = myhandles.ceros;
+  
+  
+  label_header = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','CEROS DE LA FUNCION DE TRANSFERENCIA'); 
+  label_funcion_transferencia = uicontrol('Parent',f,"style", "text",'Position',[k h-200 a l*6],'String',evalc('Ceros')); 
+
+
+end
+function form_mostrar_ganancia(src,event,formulario)
+
+  f = formulario;
+  
+  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  
+  #Global
+  k=43;#margen izquierdo
+
+  #Header
+  a=500;#ancho 
+  l=30; #largo
+  h=360;  #altura
+  
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  val = myhandles.numberOfErrors;
+  Ganancia = myhandles.ganancia;
+  
+  
+  label_header = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','GANANCIA DE LA FUNCION DE TRANSFERENCIA'); 
+  label_funcion_transferencia = uicontrol('Parent',f,"style", "text",'Position',[k h-200 a l*6],'String',evalc('Ganancia')); 
+
+
+end
+
+function refresh_figure(src,event,figure)
+  refresh(figure);
+end
+
+
+function form_mostrar_constelacion(src,event,formulario)
+  f = formulario;
+  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  figura_constelacion = figure;
+  
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  val = myhandles.numberOfErrors;
+  Transferencia = myhandles.transferencia;
+  pzmap(Transferencia);
+  button_refresh = uicontrol('Parent',figura_constelacion,'String','Refrescar','callback',  {@refresh_figure, figura_constelacion}');
 
 
 end
@@ -84,22 +214,31 @@ endfunction
 
 
 #form_master = figure('MenuBar','None'); MenuBar funciona bien aleatoriamente
-form_master = figure('Toolbar','none'); 
+form_master = figure('Toolbar','none');
+uipanel('Parent',form_master,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow'); 
+
 % create structure of handles
 myhandles = guihandles(form_master); 
 % Add some additional data as a new field called numberOfErrors
 myhandles.numberOfErrors = 0; 
 myhandles.transferencia = 0;
+myhandles.polos = 0;
+myhandles.ceros = 0;
+myhandles.ganancia = 0;
+
 % Save the structure
 guidata(form_master,myhandles) 
 
 menu_ingresar = uimenu(form_master,'Label','Ingresar Transferencia');
     uimenu(menu_ingresar,'Label','Dados coheficientes','Callback',  {@form_ingresar_transferencia_polinomios,form_master} );
-    #uimenu(menu_ingresar,'Label','Dados polos, ceros y ganancia','Callback','disp(''save'')');
+    uimenu(menu_ingresar,'Label','Dados polos, ceros y ganancia','Callback',{@form_ingresar_transferencia_dados_pzk,form_master});
     
 menu_caracteristica = uimenu(form_master,'Label','Seleccionar alguna característica');
     uimenu(menu_caracteristica,'Label','Expresion de la funcion de transferencia','Callback',  {@form_mostrar_transferencia,form_master} );
-    #uimenu(menu_caracteristica,'Label','XXXXX','Callback','disp(''save'')');  
+    uimenu(menu_caracteristica,'Label','Ceros','Callback',{@form_mostrar_ceros,form_master} );   
+    uimenu(menu_caracteristica,'Label','Polos','Callback',{@form_mostrar_polos,form_master} );  
+    uimenu(menu_caracteristica,'Label','Ganancia','Callback',{@form_mostrar_ganancia,form_master} );  
+    uimenu(menu_caracteristica,'Label','Constelacion','Callback',{@form_mostrar_constelacion, form_master} );  
     
 #Plantilla para callbacks
 #position [x,y,a,h]
