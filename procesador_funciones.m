@@ -35,6 +35,8 @@ function callback_transferencia_dados_polinomios(h, e, numerador, denominador)
   myhandles.polos = Pol;
   myhandles.ceros = Zer;
   myhandles.ganancia = k;
+  myhandles.estabiliad = analisis_estabilidad(funcion_transferencia);
+  
   % Save the change you made to the structure
   guidata(gcbo,myhandles);
   
@@ -63,6 +65,7 @@ function callback_transferencia_dados_pzk(h, e, polos, ceros, ganancia)
   myhandles.polos = Pol;
   myhandles.ceros = Zer;
   myhandles.ganancia = k;
+  myhandles.estabiliad = analisis_estabilidad(funcion_transferencia);
   % Save the change you made to the structure
   guidata(gcbo,myhandles);
   
@@ -88,6 +91,17 @@ function callback_mostrar_pzk(h, e, polos, ceros, ganancia)
   guidata(gcbo,myhandles);
   
 endfunction
+
+function retval = analisis_estabilidad(transferencia)
+  [Zer,Pol,k]=tf2zp(transferencia);
+  parte_real = real(Pol);
+  if (parte_real <= 0)
+    retval = "ESTABLE\n";
+  else
+    retval =("INESTABLE\n");
+  endif
+endfunction
+
 
 function retval  = transferencia_dados_ceros_polos_ganancia
   fprintf("Si decide ingresar un complejo no ingrese su conjugado, este ya se incluye segun el T.F.A\n");

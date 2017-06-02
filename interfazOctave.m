@@ -174,24 +174,84 @@ function form_mostrar_ganancia(src,event,formulario)
 
 end
 
-function refresh_figure(src,event,figure)
-  refresh(figure);
-end
+function form_estabilidad(src,event,formulario)
 
-
-function form_mostrar_constelacion(src,event,formulario)
   f = formulario;
+  
   uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
-  figura_constelacion = figure;
+  
+  #Global
+  k=43;#margen izquierdo
+
+  #Header
+  a=500;#ancho 
+  l=30; #largo
+  h=360;  #altura
   
   % Get the structure using guidata in the local function
   myhandles = guidata(gcbo);
   val = myhandles.numberOfErrors;
-  Transferencia = myhandles.transferencia;
-  pzmap(Transferencia);
+  Estabilidad = myhandles.estabiliad;
+  
+  
+  label_header = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','ESTABILIDAD DE LA FUNCION DE TRANSFERENCIA'); 
+  label_funcion_transferencia = uicontrol('Parent',f,"style", "text",'Position',[k h-200 a l*6],'String',evalc('Estabilidad')); 
+
+
+end
+
+function refresh_figure(src,event,figure)
+  refresh(figure);
+end
+
+function form_graficar_constelacion(transferencia)
+  figura_constelacion = figure;
+  pzmap(transferencia);
   button_refresh = uicontrol('Parent',figura_constelacion,'String','Refrescar','callback',  {@refresh_figure, figura_constelacion}');
+endfunction
 
+function form_mostrar_constelacion(src,event,formulario)
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  val = myhandles.numberOfErrors;
+  Transferencia = myhandles.transferencia;  
+  f = formulario;
+  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  form_graficar_constelacion(Transferencia);
+  
+end
 
+function form_obtener_todas_caracteristicas(src,event,formulario)
+  f = formulario;
+  
+  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  
+  #Global
+  k=43;#margen izquierdo
+
+  #Header
+  a=500;#ancho 
+  l=30; #largo
+  h=360;  #altura
+  
+  % Get the structure using guidata in the local function
+  myhandles = guidata(gcbo);
+  val = myhandles.numberOfErrors;
+  funcion_transferencia = myhandles.transferencia;
+  Polos = myhandles.polos;
+  Ceros = myhandles.ceros;
+  Ganancia = myhandles.ganancia;
+  Estabilidad = myhandles.estabiliad;
+    
+  label_header = uicontrol('Parent',f,"style", "text",'Position',[k h a l],'String','TODAS LAS CARACTERISTICAS'); 
+  edit_funcion_transferencia = uicontrol('Parent',f,"style", "edit",'enable', 'on','max',50,'min',1,'Position',[k h-65 a l*2],'String',evalc('funcion_transferencia'));
+  edit_polos = uicontrol('Parent',f,"style", "edit",'enable', 'on','max',50,'min',1,'Position',[k h-135 a l*2],'String',evalc('Polos')); 
+  edit_ceros = uicontrol('Parent',f,"style", "edit",'enable', 'on','max',50,'min',1,'Position',[k h-205 a l*2],'String',evalc('Ceros')); 
+  edit_ganancia = uicontrol('Parent',f,"style", "edit",'enable', 'on','max',50,'min',1,'Position',[k h-275 a l*2],'String',evalc('Ganancia')); 
+  edit_estabilidad = uicontrol('Parent',f,"style", "edit",'enable', 'on','max',50,'min',1,'Position',[k h-345 a l*2],'String',evalc('Estabilidad')); 
+  form_graficar_constelacion(funcion_transferencia);
+  
+    
 end
 
 
@@ -225,6 +285,7 @@ myhandles.transferencia = 0;
 myhandles.polos = 0;
 myhandles.ceros = 0;
 myhandles.ganancia = 0;
+myhandles.estabiliad = 0;
 
 % Save the structure
 guidata(form_master,myhandles) 
@@ -239,6 +300,8 @@ menu_caracteristica = uimenu(form_master,'Label','Seleccionar alguna característ
     uimenu(menu_caracteristica,'Label','Polos','Callback',{@form_mostrar_polos,form_master} );  
     uimenu(menu_caracteristica,'Label','Ganancia','Callback',{@form_mostrar_ganancia,form_master} );  
     uimenu(menu_caracteristica,'Label','Constelacion','Callback',{@form_mostrar_constelacion, form_master} );  
+    uimenu(menu_caracteristica,'Label','Analisis Estabilidad','Callback',{@form_estabilidad, form_master} );  
+    uimenu(menu_caracteristica,'Label','Obtener todas las Caracteristicas','Callback',{@form_obtener_todas_caracteristicas, form_master} );
     
 #Plantilla para callbacks
 #position [x,y,a,h]
