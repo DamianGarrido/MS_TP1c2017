@@ -6,7 +6,7 @@ source ("procesador_funciones.m");
 function form_ingresar_transferencia_polinomios(src,event,formulario)
   f = formulario;
   
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Obtener la función transferencia','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -29,15 +29,15 @@ function form_ingresar_transferencia_polinomios(src,event,formulario)
   label_denominador = uicontrol('Parent',f,"style", "text",'Position',[k i+j*5 75 30],'String','Denominador'); 
   input_denominador = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*5 75 30]); 
 
-  nota="Nota\n Ejemplo coheficientes de polinomios: [1,2,3].\nDe derecha a izquierda coheficiente independiente, lineal, cuadratico";
-  label_nota = uicontrol('Parent',f,"style", "text",'Position',[k i+j-50 a 30+100],'String',nota); 
+  nota="Nota:\nEjemplo coheficientes de polinomios: [1,2,3].\nDe derecha a izquierda coheficiente independiente, lineal, cuadratico.\nP(s)=s^2+2s+3";
+  label_nota = uicontrol('Parent',f,"style", "edit",'max',50,'min',1,'Position',[k i+j-50 a 30+100],'String',nota, 'horizontalalignment', 'left', 'verticalalignment', 'top'); 
   button_confirmar = uicontrol('Parent',f,'Position',[k i+j*4 a 30],'String','Confirmar','callback',  {@callback_transferencia_dados_polinomios , input_numerador, input_denominador});
 end
 
 function form_ingresar_transferencia_dados_pzk(src,event,formulario)
   f = formulario;
   
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Obtener la función transferencia','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -63,8 +63,8 @@ function form_ingresar_transferencia_dados_pzk(src,event,formulario)
   label_ganancia = uicontrol('Parent',f,"style", "text",'Position',[k i+j*4 75 30],'String','Ganancia'); 
   input_ganancia = uicontrol('Parent',f,"style", "edit",'Position',[k+d i+j*4 75 30]); 
   
-  nota="Nota\n Ejemplo ceros o polos: [1,i].\n Ejemplo ganancia: 1.\nSi decide ingresar un numero imaginario no ingrese su conjugado.\n Este ya se incluye, este programa genera funciones\n de transferencia solo con coheficiente reales";
-  label_nota = uicontrol('Parent',f,"style", "text",'Position',[k i+j-55 a 30+100],'String',nota); 
+  nota="Nota\nEjemplo ceros o polos: [1,i].\nEjemplo ganancia: 1.\nSi decide ingresar un numero imaginario no ingrese su conjugado.\nEste ya se incluye, este programa genera funciones\nde transferencia solo con coheficiente reales.";
+  label_nota = uicontrol('Parent',f,"style", "edit",'max', 50, 'min', 1, 'Position',[k i+j-55 a 30+100],'String',nota); 
   button_confirmar = uicontrol('Parent',f,'Position',[k i+j*3 a 30],'String','Confirmar','callback',  {@callback_transferencia_dados_pzk , input_polos, input_ceros, input_ganancia}');
 
 end
@@ -75,7 +75,7 @@ function form_mostrar_transferencia(src,event,formulario)
 
   f = formulario;
   
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Caracteristicas','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -101,7 +101,7 @@ function form_mostrar_polos(src,event,formulario)
 
   f = formulario;
   
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Caracteristicas','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -127,7 +127,7 @@ function form_mostrar_ceros(src,event,formulario)
 
   f = formulario;
   
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Caracteristicas','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -152,7 +152,7 @@ function form_mostrar_ganancia(src,event,formulario)
 
   f = formulario;
   
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Caracteristicas','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -178,7 +178,7 @@ function form_estabilidad(src,event,formulario)
 
   f = formulario;
   
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Caracteristicas','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -216,7 +216,7 @@ function form_mostrar_constelacion(src,event,formulario)
   val = myhandles.numberOfErrors;
   Transferencia = myhandles.transferencia;  
   f = formulario;
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Caracteristicas','FontSize',12,'BackgroundColor','yellow');
   form_graficar_constelacion(Transferencia);
   
 end
@@ -224,7 +224,7 @@ end
 function form_obtener_todas_caracteristicas(src,event,formulario)
   f = formulario;
   
-  uipanel('Parent',f,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Caracteristicas','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -254,6 +254,12 @@ function form_obtener_todas_caracteristicas(src,event,formulario)
     
 end
 
+function form_inicio(src,event,formulario)
+  f = formulario;
+  panel = uipanel('Parent',f,'Title','ASIC – Análisis de Sistemas de Control','FontSize',12,'BackgroundColor','yellow','titleposition', 'centertop');
+  panax = axes('Units','normal', 'Position', [0 0 1 1], 'Parent', panel);
+  imshow("main.JPG", 'Parent', panax);
+end
 
 function mostrar (h, e, p, q )
   # Se debe iniciar la figura
@@ -273,9 +279,11 @@ function mostrar (h, e, p, q )
 endfunction
 
 
-#form_master = figure('MenuBar','None'); MenuBar funciona bien aleatoriamente
-form_master = figure('Toolbar','none');
-uipanel('Parent',form_master,'Title','La mejor aplicacion del Mundo','FontSize',12,'BackgroundColor','yellow'); 
+form_master = figure("position", [300 200 560 420]);
+
+form_inicio(0,0,form_master);
+
+
 
 % create structure of handles
 myhandles = guihandles(form_master); 
@@ -290,11 +298,11 @@ myhandles.estabiliad = 0;
 % Save the structure
 guidata(form_master,myhandles) 
 
-menu_ingresar = uimenu(form_master,'Label','Ingresar Transferencia');
-    uimenu(menu_ingresar,'Label','Dados coheficientes','Callback',  {@form_ingresar_transferencia_polinomios,form_master} );
-    uimenu(menu_ingresar,'Label','Dados polos, ceros y ganancia','Callback',{@form_ingresar_transferencia_dados_pzk,form_master});
+menu_ingresar = uimenu(form_master,'Label','Ingresar');
+    uimenu(menu_ingresar,'Label','Coheficientes','Callback',  {@form_ingresar_transferencia_polinomios,form_master} );
+    uimenu(menu_ingresar,'Label','Polos, ceros y ganancia','Callback',{@form_ingresar_transferencia_dados_pzk,form_master});
     
-menu_caracteristica = uimenu(form_master,'Label','Seleccionar alguna característica');
+menu_caracteristica = uimenu(form_master,'Label','Características');
     uimenu(menu_caracteristica,'Label','Expresion de la funcion de transferencia','Callback',  {@form_mostrar_transferencia,form_master} );
     uimenu(menu_caracteristica,'Label','Ceros','Callback',{@form_mostrar_ceros,form_master} );   
     uimenu(menu_caracteristica,'Label','Polos','Callback',{@form_mostrar_polos,form_master} );  
@@ -302,6 +310,7 @@ menu_caracteristica = uimenu(form_master,'Label','Seleccionar alguna característ
     uimenu(menu_caracteristica,'Label','Constelacion','Callback',{@form_mostrar_constelacion, form_master} );  
     uimenu(menu_caracteristica,'Label','Analisis Estabilidad','Callback',{@form_estabilidad, form_master} );  
     uimenu(menu_caracteristica,'Label','Obtener todas las Caracteristicas','Callback',{@form_obtener_todas_caracteristicas, form_master} );
+menu_inicio = uimenu(form_master,'Label','Inicio', 'Callback',{@form_inicio, form_master} );
     
 #Plantilla para callbacks
 #position [x,y,a,h]
