@@ -2,7 +2,7 @@
 #Consola - Ingresar datos
 pkg load control
 pkg load signal
-source ("procesador_funciones.m");
+source ("kernel/procesador_funciones.m");
 
 ft = 0;
 mostrar_menu
