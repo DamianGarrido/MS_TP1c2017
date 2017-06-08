@@ -1,3 +1,4 @@
+1;#Simpre! para definir un script de funciones
 #Consola - Ingresar datos
 pkg load control
 pkg load signal
@@ -6,7 +7,7 @@ source ("procesador_funciones.m");
 function form_ingresar_transferencia_polinomios(src,event,formulario)
   f = formulario;
   
-  uipanel('Parent',f,'Title','Obtener la función transferencia','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Ingresar función transferencia','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo
@@ -37,7 +38,7 @@ end
 function form_ingresar_transferencia_dados_pzk(src,event,formulario)
   f = formulario;
   
-  uipanel('Parent',f,'Title','Obtener la función transferencia','FontSize',12,'BackgroundColor','yellow');
+  uipanel('Parent',f,'Title','Ingresar función transferencia','FontSize',12,'BackgroundColor','yellow');
   
   #Global
   k=43;#margen izquierdo

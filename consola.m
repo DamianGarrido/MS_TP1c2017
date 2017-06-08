@@ -1,3 +1,4 @@
+1;#Simpre! para definir un script de funciones
 #Consola - Ingresar datos
 pkg load control
 pkg load signal
