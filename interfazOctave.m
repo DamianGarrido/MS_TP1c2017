@@ -2,7 +2,7 @@
 #Consola - Ingresar datos
 pkg load control
 pkg load signal
-source ("kernel/procesador_funciones.m");
+source ("kernel\\procesador_funciones.m");
 
 
 function form_ingresar_transferencia_polinomios(src,event,formulario)
@@ -260,7 +260,7 @@ function form_inicio(src,event,formulario)
   f = formulario;
   panel = uipanel('Parent',f,'Title','ASIC – Análisis de Sistemas de Control','FontSize',12,'BackgroundColor','yellow','titleposition', 'centertop');
   panax = axes('Units','normal', 'Position', [0 0 1 1], 'Parent', panel);
-  imshow("imagenes/main.jpg", 'Parent', panax);
+  imshow("imagenes\\main.jpg", 'Parent', panax);
 end
 
 function mostrar (h, e, p, q )
