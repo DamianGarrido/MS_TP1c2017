@@ -34,6 +34,8 @@ function form_ingresar_transferencia_polinomios(src,event,formulario)
   nota="Nota:\nEjemplo coheficientes de polinomios: [1,2,3].\nDe derecha a izquierda coheficiente independiente, lineal, cuadratico.\nP(s)=s^2+2s+3";
   label_nota = uicontrol('Parent',f,"style", "edit",'max',50,'min',1,'Position',[k i+j-50 a 30+100],'String',nota, 'horizontalalignment', 'left', 'verticalalignment', 'top'); 
   button_confirmar = uicontrol('Parent',f,'Position',[k i+j*4 a 30],'String','Confirmar','callback',  {@callback_transferencia_dados_polinomios , input_numerador, input_denominador});
+  
+   
 end
 
 function form_ingresar_transferencia_dados_pzk(src,event,formulario)
@@ -267,10 +269,10 @@ function form_inicio(src,event,formulario)
   panel = uipanel('Parent',f,'Title','ASIC – Análisis de Sistemas de Control','FontSize',12,'BackgroundColor','yellow','titleposition', 'centertop');
   panax = axes('Units','normal', 'Position', [0.1 0.2 0.8 0.8], 'Parent', panel);
   imshow("imagenes\\main.jpg", 'Parent', panax);
-  nota="Nota:\nPara comenzar pruebe con la opcion ""ingresar"" que le ofrece la barra de menu en la parte superior de esta pantalla";
+  nota="Nota:\nPara comenzar pruebe con la opcion ""ingresar"" que le ofrece la barra de menus en la parte superior de esta pantalla.";
   label_nota = uicontrol('Parent',f,"style", "edit",'max',50,'min',1,'Position', [k h-350 a l+50],'String',nota, 'horizontalalignment', 'left', 'verticalalignment', 'top'); 
   
-  
+ 
 
 
 

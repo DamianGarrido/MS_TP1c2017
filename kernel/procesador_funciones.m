@@ -1,4 +1,10 @@
 1;#Simpre! para definir un script de funciones
+#Mensaje de Exito
+function msgbox_exito_ingreso_transferencia
+  h = msgbox("Funcion transferencia ingresada.\nVaya a la opcion ""caracteristicas"" del menu.");
+endfunction
+
+
 #Transferencia dados polos y ceros imaginarios
 function retval  = polinomio_dadas_raices(raices) 
   s = tf('s');
@@ -39,7 +45,7 @@ function callback_transferencia_dados_polinomios(h, e, numerador, denominador)
   
   % Save the change you made to the structure
   guidata(gcbo,myhandles);
-  
+  msgbox_exito_ingreso_transferencia();
   #set(label, 'String', evalc('funcion_transferencia'))
   #guadar_transferencia(funcion_transferencia);
   #imprimir_mensaje(funcion_transferencia);
@@ -68,7 +74,7 @@ function callback_transferencia_dados_pzk(h, e, polos, ceros, ganancia)
   myhandles.estabiliad = analisis_estabilidad(funcion_transferencia);
   % Save the change you made to the structure
   guidata(gcbo,myhandles);
-  
+  msgbox_exito_ingreso_transferencia();
 endfunction
 
 function callback_mostrar_pzk(h, e, polos, ceros, ganancia)
