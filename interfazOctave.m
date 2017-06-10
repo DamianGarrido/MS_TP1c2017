@@ -257,10 +257,24 @@ function form_obtener_todas_caracteristicas(src,event,formulario)
 end
 
 function form_inicio(src,event,formulario)
+  #Header
+  a=500;#ancho 
+  l=30; #largo
+  h=360;  #altura
+  k=43;#margen izquierdo
+  
   f = formulario;
   panel = uipanel('Parent',f,'Title','ASIC – Análisis de Sistemas de Control','FontSize',12,'BackgroundColor','yellow','titleposition', 'centertop');
-  panax = axes('Units','normal', 'Position', [0 0 1 1], 'Parent', panel);
+  panax = axes('Units','normal', 'Position', [0.1 0.2 0.8 0.8], 'Parent', panel);
   imshow("imagenes\\main.jpg", 'Parent', panax);
+  nota="Nota:\nPara comenzar pruebe con la opcion ""ingresar"" que le ofrece la barra de menu en la parte superior de esta pantalla";
+  label_nota = uicontrol('Parent',f,"style", "edit",'max',50,'min',1,'Position', [k h-350 a l+50],'String',nota, 'horizontalalignment', 'left', 'verticalalignment', 'top'); 
+  
+  
+
+
+
+  
 end
 
 function mostrar (h, e, p, q )
